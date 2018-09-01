@@ -1,0 +1,1 @@
+[Emscripten environmental setting](https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm)
