@@ -6,4 +6,4 @@ emcc wasm/add.cpp \
     -s "EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']" \
     -o wasm/add.js && \
 echo 'export default Module;' >> wasm/add.js
-mv 'wasm/add.wasm' 'public/add.wasm'
+mv 'wasm/add.wasm' 'docs/add.wasm'

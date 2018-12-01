@@ -1,11 +1,10 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
-  entry: ['babel-polyfill', `${__dirname}/src/js/index.js`],
-  target: 'node',
+  mode: 'development',
+  entry: `${__dirname}/src/js/index.js`,
   output: {
-    path: `${__dirname}/public`,
+    path: `${__dirname}/docs`,
     filename: 'index.js'
   },
   module: {
@@ -16,7 +15,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: [['env', {'modules': false}]]
+              presets: ['@babel/preset-env']
             }
           }
         ],
@@ -36,9 +35,7 @@ module.exports = {
             {
               loader: 'postcss-loader',
               options: {
-                plugins: [
-                  require('autoprefixer')({grid: true})
-                ]
+                plugins: [require('autoprefixer')({ grid: true })]
               }
             },
             'sass-loader'
@@ -48,15 +45,17 @@ module.exports = {
     ]
   },
   resolve: {
+    modules: ['node_modules'],
     extensions: ['.js']
   },
-  plugins: [ new ExtractTextPlugin('style.css') ],
+  plugins: [new ExtractTextPlugin('style.css')],
   performance: {
     hints: false
   },
-  serve: {
-    content: 'public/',
-    open: true,
-    port: 3000
+  devServer: {
+    contentBase: `${__dirname}/docs`,
+    port: 3000,
+    hot: true,
+    open: true
   }
 };
